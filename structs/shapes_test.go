@@ -110,7 +110,7 @@ func TestArea(t *testing.T) {
 */
 
 //引入「表格驱动测试」
-func TestArea(t *testing.T) {
+/* func TestArea(t *testing.T) {
 
 	//创建了一个匿名的结构体。我们用含有两个域 shape 和 want 的 []struct 声明了一个结构体切片。
 	//然后我们用测试用例去填充这个数组了。
@@ -120,6 +120,7 @@ func TestArea(t *testing.T) {
 	}{
 		{Rectangle{12, 6}, 72.0},
 		{Circle{10}, 314.1592653589793},
+		{Triangle{12, 6}, 36.0},
 	}
 
 	for _, tt := range areaTests {
@@ -148,5 +149,33 @@ func TestArea(t *testing.T) {
 		checkArea(t, circle, 314.16)
 
 	})
+
+} */
+
+//命名这些域(当测试用例不是一系列操作，而是事实的断言时，测试才清晰明了。)
+//並改進錯誤的輸出,包含用例的名字：
+//我们可以通过如下命令来运行列表中指定的测试用例： go test -run TestArea/Rectangle
+func TestArea(t *testing.T) {
+
+	//创建了一个匿名的结构体。我们用含有两个域 shape 和 want 的 []struct 声明了一个结构体切片。
+	//然后我们用测试用例去填充这个数组了。
+	areaTests := []struct {
+		name    string
+		shape   Shape
+		hasArea float64
+	}{
+		{name: "Rectangl", shape: Rectangle{Width: 12, Height: 6}, hasArea: 72.0},
+		{name: "Circle", shape: Circle{Radius: 10}, hasArea: 314.1592653589793},
+		{name: "Triangle", shape: Triangle{Base: 12, Height: 6}, hasArea: 36.0},
+	}
+
+	for _, tt := range areaTests {
+		t.Run(tt.name, func(t *testing.T) {
+			got := tt.shape.Area()
+			if got != tt.hasArea {
+				t.Errorf("%#v got %g want %g", tt.shape, got, tt.hasArea)
+			}
+		})
+	}
 
 }
