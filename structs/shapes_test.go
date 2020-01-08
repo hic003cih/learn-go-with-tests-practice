@@ -164,7 +164,8 @@ func TestArea(t *testing.T) {
 		shape   Shape
 		hasArea float64
 	}{
-		{name: "Rectangl", shape: Rectangle{Width: 12, Height: 6}, hasArea: 72.0},
+		//列表驱动测试让断言更清晰，这样可以使测试文件更易于扩展和维护
+		{name: "Rectangle", shape: Rectangle{Width: 12, Height: 6}, hasArea: 71.0},
 		{name: "Circle", shape: Circle{Radius: 10}, hasArea: 314.1592653589793},
 		{name: "Triangle", shape: Triangle{Base: 12, Height: 6}, hasArea: 36.0},
 	}

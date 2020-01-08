@@ -14,6 +14,7 @@ type Circle struct {
 } */
 
 //給類型加一些方法
+//声明结构体以创建我们自己的类型，让我们把数据集合在一起并达到简化代码的目地
 type Rectangle struct {
 	Width  float64
 	Height float64
@@ -44,6 +45,9 @@ func (t Triangle) Area() float64 {
 }
 
 //定義Shape類型(interface)
+//声明接口，这样我们可以定义适合不同参数类型的函数（参数多态）
+//接口是把负责从系统的其他部分隐藏起来的伟大工具。在我们的测试中，
+//辅助函数的代码不需要知道具体的几何形状，只需要知道获取它的面积即可。
 type Shape interface {
 	Area() float64
 }
