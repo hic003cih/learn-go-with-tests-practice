@@ -139,9 +139,11 @@ func TestAdd(t *testing.T) {
 		word := "test"
 		definition := "this is just a test"
 
-		err := dictionary.Update(word, definition)
+		err := dictionary.Add(word, definition)
 
-		assertError(t, err, ErrWordDoesNotExist)
+		assertError(t, err, nil)
+		assertDefinition(t, dictionary, word, definition)
+
 	})
 
 	t.Run("existing word", func(t *testing.T) {
@@ -153,23 +155,6 @@ func TestAdd(t *testing.T) {
 		assertError(t, err, ErrWordExists)
 		assertDefinition(t, dictionary, word, definition)
 	})
-}
-
-//更新已存在的字串
-
-func TestUpdate(t *testing.T) {
-	word := "test"
-	definition := "this is just a test"
-	dictionary := Dictionary{word: definition}
-	newDefinition := "new definition"
-
-	dictionary.Update(word, newDefinition)
-
-	assertDefinition(t, dictionary, word, newDefinition)
-}
-
-func TestDelete(t *testing.T) {
-
 }
 
 func assertStrings(t *testing.T, got, want string) {

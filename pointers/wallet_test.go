@@ -31,18 +31,6 @@ func TestWallet(t *testing.T) {
 		assertBalance(t, wallet, Bitcoin(20))
 		assertError(t, err, InsufficientFundsError)
 	})
-
-	t.Run("Withdraw insufficient funds", func(t *testing.T) {
-		startingBalance := Bitcoin(20)
-		wallet := Wallet{startingBalance}
-
-		//Withdraw必須要返回一個值
-		err := wallet.Withdraw(Bitcoin(100))
-
-		assertBalance(t, wallet, startingBalance)
-		assertError(t, err, "cannot withdraw, insufficient funds")
-
-	})
 }
 
 //把顯示錯誤的部分取出來重複使用
